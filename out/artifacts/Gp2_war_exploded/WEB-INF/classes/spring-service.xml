@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--扫描service包 则该包下的注解生效-->
+    <context:component-scan base-package="com.usst.service"/>
+
+    <!--业务注册到spring   优化：xml管理业务注册，注解管理属性注入  -->
+    <bean id="adminServiceImpl" class="com.usst.service.AdminServiceImpl">
+        <property name="adminMapper" ref="adminMapper"/>
+    </bean>
+    <bean id="studentServiceImpl" class="com.usst.service.StudentServiceImpl"/>
+    <bean id="teacherServiceImpl" class="com.usst.service.TeacherServiceImpl"/>
+
+
+    <!--声明式事务配置-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--结合AOP实现事务的织入
+    &lt;!&ndash;配置事务通知&ndash;&gt;
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        &lt;!&ndash;给哪些方法配置事务&ndash;&gt;
+        &lt;!&ndash;事务的传播特性：&ndash;&gt;
+        <tx:attributes>
+            <tx:methond name="add" propagation="REQUIRED"/>
+            <tx:methond name="delete" propagation="REQUIRED"/>
+            <tx:methond name="update" propagation="REQUIRED"/>
+            <tx:methond name="query" read-only="true"/>
+            <tx:methond name="*" read-only="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    &lt;!&ndash;配置事务切入&ndash;&gt;
+    <aop:config>
+
+    </aop:config>-->
+
+
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!--配置数据源，整合的话就交给spring去做-->
+
+    <typeAliases><!-- 这个包下所有类都可取别名，默认为首字母小写的类名。在SQL语句中返回值类型会用到-->
+        <package name="com.usst.pojo"/>
+    </typeAliases>
+
+    <!-- 注册Mapper.xml 写一个就注册一个 -->
+    <mappers>
+        <mapper class="com.usst.dao.AdminMapper"/>
+        <mapper class="com.usst.dao.StudentMapper"/>
+        <mapper class="com.usst.dao.TeacherMapper"/>
+    </mappers>
+
+
+</configuration>
